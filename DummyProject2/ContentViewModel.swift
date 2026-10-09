@@ -14,6 +14,13 @@ nonisolated public final class Todo: Identifiable, Decodable, Sendable {
     let userId: Int
     let title: String
     let completed: Bool
+    
+    init(id: Int, userId: Int, title: String, completed: Bool) {
+        self.id = id
+        self.userId = userId
+        self.title = title
+        self.completed = completed
+    }
 }
 
 
@@ -33,7 +40,7 @@ final class ContentViewModel {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos") else {return}
         
         do {
-            throw DataLoadingError.requestFailed
+            //throw DataLoadingError.requestFailed
             try await Task.sleep(for: .seconds(5))
             let (data,_) = try await URLSession.shared.data(from: url)
             let decodedTodos = try JSONDecoder().decode([Todo].self, from: data)
@@ -80,7 +87,7 @@ enum DataLoadingError: Error, Equatable {
     var errorDescription: String? {
         switch self {
         case .requestFailed:
-            return "We could not pull the data from the URL"
+            return "URL request FAiled"
         case .internetDown:
             return "The server may be down."
         }

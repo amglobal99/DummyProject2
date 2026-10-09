@@ -3,7 +3,6 @@ import Playgrounds
 
 struct ContentView: View {
     
-    
     @State var viewModel = ContentViewModel()
     
     var body: some View {
@@ -23,24 +22,15 @@ struct ContentView: View {
                     ContentUnavailableView(errorMessage: errorMessage)
                 }else{
                     List(viewModel.todos) { todo in
-                        Text( String(todo.title.prefix(25)))
+                        NavigationLink(destination: TodoView(item: todo)) {
+                            Text( String(todo.title.prefix(25)))
+                        }
                     }
                     .navigationTitle("To-Dos")
-                    
                 }
-                
-            }
+            } // group
         } // nav stack
         .task {
-//            do {
-//                await viewModel.loadData()
-//            } catch {
-//                // Handle the error gracefully
-//                viewModel.errorMessage = error.localizedDescription
-//                viewModel.isLoading = false
-//            }
-//            
-            
             await viewModel.loadData()
         }
             
