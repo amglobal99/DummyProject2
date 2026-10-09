@@ -40,7 +40,7 @@ final class ContentViewModel {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos") else {return}
         
         do {
-            //throw DataLoadingError.requestFailed
+           // throw DataLoadingError.requestFailed
             try await Task.sleep(for: .seconds(5))
             let (data,_) = try await URLSession.shared.data(from: url)
             let decodedTodos = try JSONDecoder().decode([Todo].self, from: data)

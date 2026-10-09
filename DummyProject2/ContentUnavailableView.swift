@@ -25,16 +25,27 @@ struct ContentUnavailableView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12)) // Clips background to shape
             
             
-            Button("Exit App") {
-                // Hard exit (Forces the app to close immediately)
-                // Note: Susceptible to App Store rejection.
-                exit(0)
+            Button("Check Connection") {
+                
+               // exit(0)
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
             }
             .tint(.red)
             .buttonStyle(.borderedProminent)
             
         } // vstack
     } //body
+    
+    
+    
+    func goToHere() {
+        
+    }
+    
+    
+    
 }
 
 
