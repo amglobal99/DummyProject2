@@ -13,9 +13,10 @@ struct TodoView: View {
     
     @State var isShowingSheet =  false
     @State var isShowingFullScreenPopup =  false
+    @State var isShowingPopover = false
+    
     
     var body: some View {
-        
         
         VStack(alignment: .leading,  spacing:25) {
             Text("\(item.title)")
@@ -45,7 +46,10 @@ struct TodoView: View {
             .buttonStyle(.borderedProminent)
             
             
-            
+            Button("Show Popover") {
+                isShowingPopover = true
+            }
+            .buttonStyle(.borderedProminent)
             
         }//vstack
         .sheet(isPresented: $isShowingSheet) {
@@ -53,9 +57,17 @@ struct TodoView: View {
                 .font(.title)
                 .padding()
         }
+        
         .fullScreenCover(isPresented: $isShowingFullScreenPopup) {
             MyFullScreenView()
         }
+        
+        .popover(isPresented: $isShowingPopover) {
+            Text("This is popover content")
+                .padding()
+                .presentationCompactAdaptation(.popover)
+        }
+        
     }
     
     
